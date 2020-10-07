@@ -87,9 +87,7 @@ export default {
       next()
     })
 
-    this.$router.afterEach(() => {
-      nprogress.done()
-    })
+    this.$router.afterEach(() => nprogress.done())
   },
 
   computed: {
@@ -105,16 +103,12 @@ export default {
 
 function updateMetaTags (meta, current) {
   if (current) {
-    current.forEach(c => {
-      document.head.removeChild(c)
-    })
+    current.forEach(c => document.head.removeChild(c))
   }
   if (meta) {
     return meta.map(m => {
       const tag = document.createElement('meta')
-      Object.keys(m).forEach(key => {
-        tag.setAttribute(key, m[key])
-      })
+      Object.keys(m).forEach(key => tag.setAttribute(key, m[key]))
       document.head.appendChild(tag)
       return tag
     })
